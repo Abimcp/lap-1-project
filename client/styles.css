@@ -31,15 +31,94 @@ body {
 main {
     background-color: #fff;
     height: 100vh;
-    width: 40vw;
+    width: 60vw;
     min-width: 576px;
     margin: 0 auto;
     padding-top: 30px;
 }
+h1 {
+    margin: 0 0 0 5vw;
+}
 
-/* === POST SECTION === */
+/* === DARK MODE SWITCH === */
 
-.post {
+#dark__mode {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+    padding: 0 8vw 2vw 0;
+    border: none;
+    color: var(--c-grey-text);
+    resize: none;
+    outline: transparent;
+    background-color: transparent;
+}
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: '';
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: #2196f3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+/* === POST SECTION & REPLY SECTION === */
+
+.post,
+.reply {
     background-color: var(--c-grey-background);
     margin: 10px 30px;
     display: flex;
@@ -48,7 +127,8 @@ main {
     border-radius: 5px;
 }
 
-.post__text {
+.post__text,
+.reply__text {
     font-family: 'Exo', sans-serif;
     font-size: 1.6rem;
     font-weight: 500;
@@ -62,11 +142,13 @@ main {
     outline: transparent;
 }
 
-.post__text::placeholder {
+.post__text::placeholder,
+.reply__text::placeholder {
     color: var(--c-grey-placeholder);
 }
 
-.post__actions {
+.post__actions,
+.reply__actions {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -84,6 +166,40 @@ main {
     font-weight: 500;
 }
 
+/* === EMOJI BUTTONS === */
+.reactions {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 80%;
+    margin: 10px auto 20px;
+}
+
+#reaction__btn,
+#reply__btn {
+    width: 38.62px;
+    height: 38px;
+    border-radius: 100px;
+    align-items: center;
+}
+.reply__area {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(77, 77, 77, 0.6);
+    transition: all 0.4s;
+    visibility: hidden;
+    opacity: 0;
+} 
+ .reply__container:target {
+    visibility: visible;
+    opacity: 1;
+}
 /* === GIPHY MODAL === */
 
 .giphy-search {

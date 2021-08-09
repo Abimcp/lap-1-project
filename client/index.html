@@ -4,13 +4,23 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="styles.css" />    
         <script defer src="bundle.js"></script>
         <title>Buzzer</title>
     </head>
 
     <body>
         <main>
+            <header>
+                <h1>Love Island Reacts</h1>
+            </header>
+            <!-- DARK MODE -->
+            <section id="dark__mode">
+                <label class="switch">
+                    <input type="checkbox" />
+                    <span class="slider round"></span>
+                </label>
+            </section>
             <!-- POST ENTRY -->
             <section class="post">
                 <textarea class="post__text" placeholder="What's happening?" maxlength="280"></textarea>
@@ -19,7 +29,33 @@
                     <p class="post__characters"><span class="current-count">0</span>/280 characters</p>
                 </div>
             </section>
-
+            <!-- POSTS -- this should be where the uploaded posts go -->
+            <section class="post">
+                <textarea class="post__text" placeholder="" maxlength="280"></textarea>
+                <div class="reactions">
+                    <button type="button" id="reaction__btn">💖</button>
+                    <button type="button" id="reaction__btn">👍</button>
+                    <button type="button" id="reaction__btn">👏</button>
+                    <button type="button" id="reply__btn"<a href="#reply-container"></a>💬</button>
+                </div>
+            
+            <!-- REPLY -->
+            
+                <textarea class="reply__text" placeholder="Reply" maxlength="280"></textarea>
+            </section> 
+            <div class="post__actions">
+                <!-- <a href="#reply__container"></a> -->
+            
+            <section class="reply__area" id="reply__area">
+                    <div id="reply__container">
+                        <input type="text" placeholder="Reply" />
+                        <!-- <textarea class="reply__text" placeholder="Reply" maxlength="280"></textarea> -->
+                        <a href="" class="modal__close">&times;</a>
+                    </div>
+                <div class="reply__results"></div>
+            </div>
+            </section>
+        </section>
             <!-- GIPHY SEARCH -->
             <section class="giphy-search" id="giphy-search">
                 <form class="giphy-search__form">
