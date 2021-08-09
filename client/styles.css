@@ -108,7 +108,7 @@ main {
 
 .giphy-search__form {
     width: 40%;
-    height: 70vh;
+    height: 50vh;
     background-color: var(--c-grey-background);
     padding: 3rem;
     border-radius: 10px;
@@ -141,4 +141,14 @@ main {
     font-family: sans-serif;
     font-size: 48px;
     font-weight: 600;
+}
+
+.giphy-search__results {
+    display: flex;
+    justify-content: center;
+}
+
+.giphy-search__results > img {
+    margin-top: 10px;
+    height: 250px;
 }
