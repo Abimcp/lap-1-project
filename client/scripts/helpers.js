@@ -1,3 +1,4 @@
+const { fetchGiphy } = require('./giphy');
 const updateCharacterCount = () => {
     const currentCount = document.querySelector('.current-count');
     const postText = document.querySelector('.post__text');
@@ -18,6 +19,7 @@ const updateCharacterCount = () => {
 const handleGifSearch = event => {
     if (event.key === 'Enter') {
         // addGifsToDocument()
+        fetchGiphy();
     }
 };
 
