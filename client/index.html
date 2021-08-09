@@ -5,7 +5,31 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="styles.css" />
-        <title>Document</title>
+        <script defer src="bundle.js"></script>
+        <title>Buzzer</title>
     </head>
-    <body></body>
+
+    <body>
+        <main>
+            <!-- POST ENTRY -->
+            <section class="post">
+                <textarea class="post__text" placeholder="What's happening?" maxlength="280"></textarea>
+                <div class="post__actions">
+                    <a href="#giphy-search"><img src="assets/gif.png" alt="gif" /></a>
+                    <p class="post__characters"><span class="current-count">0</span>/280 characters</p>
+                </div>
+            </section>
+
+            <!-- GIPHY SEARCH -->
+            <section class="giphy-search" id="giphy-search">
+                <form class="giphy-search__form">
+                    <div class="giphy-search__container">
+                        <input type="text" placeholder="Search for GIFs" />
+                        <a href="" class="modal__close">&times;</a>
+                    </div>
+                </form>
+                <div class="giphy-search__results"></div>
+            </section>
+        </main>
+    </body>
 </html>
