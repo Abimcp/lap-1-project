@@ -9,6 +9,9 @@ const writeToJson = data => {
     });
 };
 
+/**
+ * @param {object} newPost an object that represents the properties in the 'Post' model.
+ */
 const addNewPost = newPost => {
     fs.readFile('data.json', 'utf-8', (error, data) => {
         if (error) {
@@ -21,6 +24,9 @@ const addNewPost = newPost => {
     });
 };
 
+/**
+ * @param {object} comment an object that represents the properties of the 'Comment' model.
+ */
 const addCommentToPost = (postId, comment) => {
     fs.readFile('data.json', 'utf-8', (error, data) => {
         if (error) {
@@ -40,6 +46,9 @@ const addCommentToPost = (postId, comment) => {
     });
 };
 
+/**
+ * @param {string} reaction the emoji sent as a string.
+ */
 const addReactionToPost = (postId, reaction) => {
     fs.readFile('data.json', 'utf-8', (error, data) => {
         if (error) {
