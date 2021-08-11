@@ -9,7 +9,7 @@ class Post {
         this.timestamp = data.timestamp;
         this.fromNow = moment(data.timestamp).fromNow();
         this.like = 0;
-        this.thumpsUp = 0;
+        this.thumbsUp = 0;
         this.clap = 0;
         this.comments = data.comments || [];
     }
@@ -25,7 +25,7 @@ class Post {
                 this.like++;
                 break;
             case 'thumbsUp':
-                this.thumpsUp++;
+                this.thumbsUp++;
                 break;
             case 'clap':
                 this.clap++;

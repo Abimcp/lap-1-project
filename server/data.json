@@ -1,17 +1,1 @@
-[
-    {
-        "id": 2,
-        "message": "Hello from the same side",
-        "gif": "",
-        "timestamp": "",
-        "fromNow": "",
-        "like": 0,
-        "thumbsUp": 0,
-        "clap": 0,
-        "comments": [
-            {
-                "message": "Hi"
-            }
-        ]
-    }
-]
+[]
