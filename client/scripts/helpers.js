@@ -25,9 +25,30 @@ const enablePostButton = () => {
 };
 
 const handleGifSearch = event => {
+    event.preventDefault();
     if (event.key === 'Enter') {
         fetchGiphy();
     }
 };
 
-module.exports = { updateCharacterCount, enablePostButton, handleGifSearch };
+const addSelectedGifToPost = event => {
+    event.preventDefault();
+
+    const postContent = document.querySelector('.post__content');
+    const gifSearchModal = document.querySelector('.giphy-search');
+    const gifImage = document.querySelector('.giphy-search__results img');
+
+    if (gifImage) {
+        gifImage.style.height = '200px';
+        gifImage.style.objectFit = 'contain';
+        postContent.appendChild(gifImage);
+        gifSearchModal.style.visibility = 'hidden';
+    }
+};
+
+module.exports = {
+    updateCharacterCount,
+    enablePostButton,
+    handleGifSearch,
+    addSelectedGifToPost
+};
