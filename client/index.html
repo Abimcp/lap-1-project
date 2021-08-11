@@ -5,7 +5,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="styles.css" />
-
         <script defer src="bundle.js"></script>
         <title>Buzzer</title>
     </head>
@@ -25,14 +24,14 @@
             <!-- POST ENTRY -->
             <section class="post">
                 <textarea class="post__text" placeholder="What's happening?" maxlength="280"></textarea>
-                <div class="post__actions">
+                <form class="post__actions">
                     <a href="#giphy-search"><img src="assets/gif.png" alt="gif" /></a>
                     <p class="post__characters"><span class="current-count">0</span>/280 characters</p>
-                </div>
+                    <input type="submit" value="Post" class="post__btn" />
+                </form>
             </section>
             <!-- POSTS -- this should be where the uploaded posts go -->
             <section class="post">
-                <textarea class="post__text" placeholder="" maxlength="280"></textarea>
                 <div class="reactions">
                     <button type="button" id="heart__btn" class="reaction__btn">💖</button>
                     <button type="button" id="thumb__btn" class="reaction__btn">👍</button>
