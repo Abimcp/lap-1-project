@@ -33,6 +33,7 @@ body {
     background-image: url('assets/Suitcases_banner_1728x.png');
     background-repeat: initial;
     overflow: auto scroll;
+    max-width: 100vw;
 }
 
 header {
@@ -45,6 +46,7 @@ main {
     width: 65vw;
     min-width: 576px;
     margin: 0 auto;
+    max-width: 90vw;
 }
 h1 {
     margin: 0 0 0 5vw;
@@ -224,6 +226,11 @@ input:checked + .slider:before {
 }
 
 /* REPLY MODAL */
+textarea {
+    resize: none;
+    width: 70%;
+    height: 50vh;
+}
 .reply-search {
     position: absolute;
     top: 0;
@@ -268,7 +275,19 @@ input:checked + .slider:before {
 .reply-search__container > text::placeholder {
     color: var(--c-grey-placeholder);
 }
-
+.reply-search__text {
+    width: 40%;
+    height: 50vh;
+    background-color: var(--c-grey-background);
+    padding: 3rem;
+    border-radius: 10px;
+    overflow: auto scroll;
+}
+.reply-search__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 /* === GIPHY MODAL === */
 
 .giphy-search {
