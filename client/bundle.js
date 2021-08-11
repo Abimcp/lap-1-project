@@ -25,16 +25,28 @@ module.exports = { fetchGiphy };
 },{}],2:[function(require,module,exports){
 const { fetchGiphy } = require('./giphy');
 
+const postText = document.querySelector('.post__text');
+// const replyText = document.querySelector('.reply__text');
+const postButton = document.querySelector('.post__btn');
+
 const updateCharacterCount = () => {
     const currentCount = document.querySelector('.current-count');
-    const postText = document.querySelector('.post__text');
-    const replyText = document.querySelector('.reply__text');
 
-    if (postText.value.length === 280 || replyText.value.length === 280) {
+    if (postText.value.length === 280) {
         alert('You have reached the maximum amount of characters');
     }
 
     currentCount.textContent = postText.value.length;
+};
+
+const enablePostButton = () => {
+    if (!postText.value.length) {
+        postButton.style.backgroundColor = '#959595';
+        postButton.style.cursor = 'not-allowed';
+    } else {
+        postButton.style.backgroundColor = '#56d8e5cc';
+        postButton.style.cursor = 'pointer';
+    }
 };
 
 const handleGifSearch = event => {
@@ -43,15 +55,22 @@ const handleGifSearch = event => {
     }
 };
 
-module.exports = { updateCharacterCount, handleGifSearch };
+module.exports = { updateCharacterCount, enablePostButton, handleGifSearch };
 
 },{"./giphy":1}],3:[function(require,module,exports){
-const { updateCharacterCount, handleGifSearch, fetchPost } = require('./helpers');
+const {
+    updateCharacterCount,
+    handleGifSearch,
+    enablePostButton
+} = require('./helpers');
 
 const postText = document.querySelector('.post__text');
 const searchbar = document.querySelector('.giphy-search__container input');
 
 postText.addEventListener('keyup', updateCharacterCount);
+postText.addEventListener('keydown', enablePostButton);
 searchbar.addEventListener('keydown', handleGifSearch);
+
+enablePostButton();
 
 },{"./helpers":2}]},{},[3]);

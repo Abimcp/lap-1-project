@@ -10,6 +10,7 @@
     --c-grey-reaction: #eee;
     --c-grey-border: #d1d0d0;
     --c-blue-cta: #0d99e8;
+    --c-blue-loveIsland: #56d8e5cc;
 }
 
 *,
@@ -35,7 +36,7 @@ body {
 }
 
 header {
-    background-color: rgba(86, 216, 229, 0.8);
+    background-color: var(--c-blue-loveIsland);
     border-radius: 25px;
 }
 main {
@@ -165,7 +166,7 @@ input:checked + .slider:before {
 .reply__actions {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     width: 80%;
     margin: 10px auto 20px;
 }
@@ -178,6 +179,18 @@ input:checked + .slider:before {
     color: var(--c-grey-placeholder);
     font-size: 1.4rem;
     font-weight: 500;
+}
+
+.post__btn {
+    font-family: 'Exo', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    background-color: var(--c-blue-loveIsland);
+    color: var(--c-grey-background);
+    border: none;
+    border-radius: 40px;
+    padding: 5px 20px;
+    cursor: pointer;
 }
 
 /* === EMOJI BUTTONS === */
