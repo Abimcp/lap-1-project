@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="styles.css" />
+        <script src="scripts/reactions.js"></script>
         <script defer src="bundle.js"></script>
         <title>Buzzer</title>
     </head>
@@ -14,13 +15,6 @@
             <header>
                 <h1>Love Island Reacts</h1>
             </header>
-            <!-- DARK MODE -->
-            <section id="dark__mode">
-                <label class="switch">
-                    <input type="checkbox" />
-                    <span class="slider round"></span>
-                </label>
-            </section>
             <!-- POST ENTRY -->
             <section class="post">
                 <div class="post__content">
@@ -36,11 +30,18 @@
             <section class="post" id="posts-container">
 
                 <div class="reactions">
-                    <button type="button" id="heart__btn" class="reaction__btn">💖</button>
-                    <button type="button" id="thumb__btn" class="reaction__btn">👍</button>
-                    <button type="button" id="clap__btn" class="reaction__btn">👏</button>
+                    <button type="button" id="heart__btn" class="reaction__btn" onClick="addLike('outputheart')">
+                        💖
+                        <span id="outputheart"></span>
+                    </button>
+                    <button type="button" id="thumb__btn" class="reaction__btn" onClick="addLike('outputthumb')">
+                        👍<span id="outputthumb"></span>
+                    </button>
+                    <button type="button" id="clap__btn" class="reaction__btn" onClick="addLike('outputclap')">
+                        👏 <span id="outputclap"></span>
+                    </button>
                     <button type="button" id="reply__btn" class="reaction__btn">
-                        <a href="#reply-search">💬</a>
+                        <a href="#reply-search">💬 
                     </button>
                 </div>
             </section>
@@ -62,11 +63,13 @@
                     <div class="giphy-search__results"></div>
                 </form>
             </section>
+
+            <!-- FOOTER -->
+            <section class="footer__container">
+                <footer>
+                    <p>©Elicia, Tobi, Corneliu & Abi</p>
+                </footer>
+            </section>
         </main>
-        <section class="footer__container">
-            <footer>
-                <p>©Elicia, Tobi, Corneliu & Abi</p>
-            </footer>
-        </section>
     </body>
 </html>
