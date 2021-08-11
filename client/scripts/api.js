@@ -1,15 +1,24 @@
 const postEntry = event => {
     event.preventDefault();
+    const postText = document.querySelector('.post__text').value;
     fetch('http://localhost:3000/posts', {
         method: 'POST',
-        body: JSON.stringify({ message: 'Hi', timestamp: new Date() }),
+        body: JSON.stringify({
+            message: postText,
+            timestamp: new Date(),
+            gif: document.querySelector('.post__content img')
+                ? document.querySelector('.post__content img').src
+                : null
+        }),
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json'
         }
     })
         .then(res => res.json())
-        .then(data => appendPost(data))
+        .then(data => console.log(data))
+        // removes the #giphy_search from url
+        .then(window.location.replace(window.location.href.split('#')[0]))
         .catch(error => (error, 'Error catching entry'));
 };
 
@@ -34,4 +43,4 @@ const getAllPosts = () => {
         .catch(error => (error, 'Error catching entry'));
 };
 
-module.exports = postEntry;
+module.exports = { postEntry, getAllPosts };
