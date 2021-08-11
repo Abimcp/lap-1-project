@@ -1,7 +1,6 @@
 const apiKey = 'dc6zaTOxFJmzC';
 let results = document.querySelector('.giphy-search__results');
 
-document.addEventListener('DOMContentLoaded', fetchGiphy);
 function fetchGiphy() {
     results.innerHTML = '';
     let str = document.querySelector('#gif-search-bar').value.trim();
@@ -11,6 +10,7 @@ function fetchGiphy() {
         .then(json => {
             let img = document.createElement('img');
             img.src = json.data[0].images.fixed_height_downsampled.url;
+            img.style.cursor = 'pointer';
             results.appendChild(img);
             document.querySelector('#gif-search-bar').value = '';
         })

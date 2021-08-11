@@ -2,7 +2,6 @@
 const apiKey = 'dc6zaTOxFJmzC';
 let results = document.querySelector('.giphy-search__results');
 
-document.addEventListener('DOMContentLoaded', fetchGiphy);
 function fetchGiphy() {
     results.innerHTML = '';
     let str = document.querySelector('#gif-search-bar').value.trim();
@@ -12,6 +11,7 @@ function fetchGiphy() {
         .then(json => {
             let img = document.createElement('img');
             img.src = json.data[0].images.fixed_height_downsampled.url;
+            img.style.cursor = 'pointer';
             results.appendChild(img);
             document.querySelector('#gif-search-bar').value = '';
         })
@@ -50,26 +50,52 @@ const enablePostButton = () => {
 };
 
 const handleGifSearch = event => {
+    event.preventDefault();
     if (event.key === 'Enter') {
         fetchGiphy();
     }
 };
 
-module.exports = { updateCharacterCount, enablePostButton, handleGifSearch };
+const addSelectedGifToPost = event => {
+    event.preventDefault();
+
+    const postContent = document.querySelector('.post__content');
+    const gifSearchModal = document.querySelector('.giphy-search');
+    const gifImage = document.querySelector('.giphy-search__results img');
+
+    if (gifImage) {
+        gifImage.style.height = '200px';
+        gifImage.style.objectFit = 'contain';
+        postContent.appendChild(gifImage);
+        gifSearchModal.style.visibility = 'hidden';
+    }
+};
+
+module.exports = {
+    updateCharacterCount,
+    enablePostButton,
+    handleGifSearch,
+    addSelectedGifToPost
+};
 
 },{"./giphy":1}],3:[function(require,module,exports){
 const {
     updateCharacterCount,
     handleGifSearch,
-    enablePostButton
+    enablePostButton,
+    addSelectedGifToPost
 } = require('./helpers');
 
 const postText = document.querySelector('.post__text');
 const searchbar = document.querySelector('.giphy-search__container input');
+const gifImageContainer = document.querySelector('.giphy-search__results');
+const postButton = document.querySelector('.post__btn');
 
-postText.addEventListener('keyup', updateCharacterCount);
 postText.addEventListener('keydown', enablePostButton);
+postText.addEventListener('keyup', updateCharacterCount);
+postButton.addEventListener('click', postEntry);
 searchbar.addEventListener('keydown', handleGifSearch);
+gifImageContainer.addEventListener('click', addSelectedGifToPost);
 
 enablePostButton();
 
