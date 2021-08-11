@@ -22,10 +22,15 @@ router.get('/', (req, res) => {
     });
 });
 
-// //put route for updating emojis /posts/:id
+//put route for updating emojis /posts/:id
 
 router.post('/:id/reactions', (req, res) => {
     const id = parseInt(req.params.id);
+
+    if (!id) {
+        res.status(404).json({ message: `There is no post with the id ${id}` });
+    }
+
     const reaction = req.body;
     const key = Object.keys(reaction);
     addReactionToPost(id, reaction[key]);
@@ -44,6 +49,11 @@ router.post('/', (req, res) => {
 //post route to add comments /posts/:id/comments
 router.post('/:id/comments', (req, res) => {
     const id = parseInt(req.params.id);
+
+    if (!id) {
+        res.status(404).json({ message: `There is no post with the id ${id}` });
+    }
+
     const newComment = req.body;
     addCommentToPost(id, newComment);
     res.status(201).json(newComment);
@@ -58,6 +68,13 @@ router.get('/:id', (req, res) => {
         try {
             const posts = JSON.parse(data);
             const id = parseInt(req.params.id);
+
+            if (!id) {
+                res.status(404).json({
+                    message: `There is no post with the id ${id}`
+                });
+            }
+
             const post = posts.filter(post => post.id === id);
             res.json(post);
         } catch (err) {
