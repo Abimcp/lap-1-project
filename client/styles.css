@@ -47,6 +47,7 @@ main {
     min-width: 576px;
     margin: 0 auto;
     max-width: 90vw;
+    overflow: auto scroll;
 }
 h1 {
     margin: 0 0 0 5vw;

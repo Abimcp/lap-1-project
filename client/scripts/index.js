@@ -5,7 +5,7 @@ const {
     addSelectedGifToPost
 } = require('./helpers');
 
-const { postEntry } = require('./api');
+const { postEntry, getAllPosts } = require('./api');
 
 const postText = document.querySelector('.post__text');
 const searchbar = document.querySelector('.giphy-search__container input');
@@ -21,3 +21,4 @@ searchbar.addEventListener('keydown', handleGifSearch);
 gifImageContainer.addEventListener('click', addSelectedGifToPost);
 
 enablePostButton();
+getAllPosts();
