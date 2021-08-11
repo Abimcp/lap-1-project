@@ -43,7 +43,7 @@ header {
 main {
     background-color: #fff;
     height: 100vh;
-    width: 75vw;
+    width: 65vw;
     min-width: 576px;
     margin: 0 auto;
     max-width: 90vw;
@@ -144,6 +144,12 @@ input:checked + .slider:before {
     border-radius: 5px;
 }
 
+.post__content {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
 .post__text,
 .reply__text {
     font-family: 'Exo', sans-serif;
@@ -151,7 +157,6 @@ input:checked + .slider:before {
     font-weight: 500;
     background-color: transparent;
     height: 13rem;
-    width: 80%;
     margin-top: 30px;
     border: none;
     color: var(--c-grey-text);

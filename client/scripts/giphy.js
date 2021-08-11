@@ -10,6 +10,7 @@ function fetchGiphy() {
         .then(json => {
             let img = document.createElement('img');
             img.src = json.data[0].images.fixed_height_downsampled.url;
+            img.style.cursor = 'pointer';
             results.appendChild(img);
             document.querySelector('#gif-search-bar').value = '';
         })
