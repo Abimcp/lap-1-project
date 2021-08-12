@@ -1,0 +1,16 @@
+{
+    "name": "client",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "bundle": "concurrently \"watchify ./scripts -o bundle.js\" \"python -m http.server\""
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "concurrently": "^6.2.1",
+        "watchify": "^4.0.0"
+    }
+}
