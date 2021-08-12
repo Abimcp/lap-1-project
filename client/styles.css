@@ -261,9 +261,6 @@ a {
     outline: transparent;
     overflow: scroll;
     resize: none;
-
-}
-
 /* .reply-search__container > text::placeholder {
     color: var(--c-grey-placeholder);
 } */
@@ -356,17 +353,13 @@ a {
 footer {
     background-color: rgba(163, 255, 54, 0.5);
     font-family: 'Pecita', cursive;
-    color: whitesmoke;
+    color: var(--c-grey-text);
 }
 footer > p {
     display: flex;
     justify-content: space-evenly;
 }
 .footer__container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    position: absolute;
     bottom: 8px;
     left: 16px;
     justify-content: space-evenly;

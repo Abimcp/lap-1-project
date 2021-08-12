@@ -185,6 +185,20 @@ module.exports = {
 };
 
 },{"./giphy":2}],4:[function(require,module,exports){
+let hasClicked = false;
+
+function addLike(outputId) {
+    let current = document.getElementById(outputId).innerHTML;
+    if (!hasClicked) {
+        current++;
+        document.getElementById(outputId).innerHTML = current;
+        // hasClicked = true;
+    }
+}
+
+module.exports = addLike;
+
+},{}],5:[function(require,module,exports){
 const {
     updateCharacterCount,
     handleGifSearch,
@@ -193,6 +207,8 @@ const {
 } = require('./helpers');
 
 const { postEntry, getAllPosts } = require('./api');
+
+const addLike = require('./reactions');
 
 const postText = document.querySelector('.post__text');
 const postButton = document.querySelector('.post__btn');
@@ -209,4 +225,4 @@ gifImageContainer.addEventListener('click', addSelectedGifToPost);
 enablePostButton();
 getAllPosts();
 
-},{"./api":1,"./helpers":3}]},{},[4]);
+},{"./api":1,"./helpers":3,"./reactions":4}]},{},[5]);
