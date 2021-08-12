@@ -187,8 +187,8 @@ a {
 .reaction__btn,
 #reply__btn {
     float: left;
-    padding: 7px;
-    height: 38px;
+    width: 45px;
+    height: 45px;
     align-items: center;
     border: none;
     background-color: whitesmoke;
@@ -219,11 +219,6 @@ a {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-/* REPLY MODAL */
-/* textarea {
-    width: 70%;
-    height: 50vh;
-} */
 .reply-search {
     position: absolute;
     top: 0;
@@ -266,15 +261,6 @@ a {
     overflow: scroll;
     resize: none;
 }
-/* .reply-search__container > text::placeholder {
-    color: var(--c-grey-placeholder);
-} */
-
-/* .reply-search__container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-} */
 
 #reply__container .modal__close {
     /* color: white; */
