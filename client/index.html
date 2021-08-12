@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="styles.css" />
+        <link rel="icon" href="./assets/favicon_io (1) 2/favicon-16x16.png" type="image/png" />
+        <script src="scripts/reactions.js"></script>
+        <script defer src="bundle.js"></script>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <script defer src="bundle.js"></script>
-    <title>Buzzer</title>
-</head>
+        <title>Love Island Reacts</title>
+    </head>
 
 <body>
     <main>
@@ -60,15 +62,25 @@
                     <input type="text" placeholder="Search for GIFs" id="gif-search-bar" />
                     <a href="" class="modal__close">&times;</a>
                 </div>
-                <div class="giphy-search__results"></div>
-            </form>
-        </section>
-    </main>
-    <section class="footer__container">
-        <footer>
-            <p>©Elicia, Tobi, Corneliu & Abi</p>
-        </footer>
-    </section>
-</body>
+                <div class="reply__results"></div>
+            </section>
+            <!-- GIPHY SEARCH -->
+            <section class="giphy-search" id="giphy-search">
+                <form class="giphy-search__form">
+                    <div class="giphy-search__container">
+                        <input type="text" placeholder="Search for GIFs" id="gif-search-bar" />
+                        <a href="" class="modal__close">&times;</a>
+                    </div>
+                    <div class="giphy-search__results"></div>
+                </form>
+            </section>
 
+            <!-- FOOTER -->
+            <section class="footer__container">
+                <footer>
+                    <p>©Elicia, Tobi, Corneliu & Abi</p>
+                </footer>
+            </section>
+        </main>
+    </body>
 </html>
