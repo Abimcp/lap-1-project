@@ -23,25 +23,84 @@ const postEntry = event => {
         .catch(error => (error, 'Error catching entry'));
 };
 
-function appendPosts(posts) {
-    posts.forEach(appendPost);
+function createReactions() {
+    const heartBtn = document.createElement('button');
+    const thumbBtn = document.createElement('button');
+    const clapBtn = document.createElement('button');
+    const replyBtn = document.createElement('button');
+    const aTag = document.createElement('a');
+    const reactions = document.createElement('div');
+
+    heartBtn.setAttribute('class', 'reaction__btn');
+    heartBtn.setAttribute('id', 'heart__btn');
+    heartBtn.textContent = '💖';
+
+    thumbBtn.setAttribute('class', 'reaction__btn');
+    thumbBtn.setAttribute('id', 'thumb__btn');
+    thumbBtn.textContent = '👍';
+
+    clapBtn.setAttribute('class', 'reaction__btn');
+    clapBtn.setAttribute('id', 'clap__btn');
+    clapBtn.textContent = '👏';
+
+    aTag.setAttribute('href', '#reply-search');
+    aTag.textContent = '💬';
+
+    replyBtn.setAttribute('class', 'reaction__btn');
+    replyBtn.setAttribute('id', 'reply__btn');
+    replyBtn.appendChild(aTag);
+
+    reactions.setAttribute('class', 'reactions');
+    reactions.appendChild(heartBtn);
+    reactions.appendChild(thumbBtn);
+    reactions.appendChild(clapBtn);
+    reactions.appendChild(replyBtn);
+
+    return reactions;
+}
+
+function createPost(data) {
+    const postContainer = document.createElement('div');
+    const entries = document.createElement('p');
+    const gif = document.createElement('img');
+    const timestamp = document.createElement('p');
+
+    entries.setAttribute('class', 'message');
+    timestamp.setAttribute('class', 'timestamp');
+
+    entries.textContent = data.message;
+    entries.contentEditable = 'true';
+    timestamp.textContent = data.fromNow;
+    gif.src = data.gif || '';
+
+    postContainer.appendChild(entries);
+    postContainer.appendChild(timestamp);
+    postContainer.appendChild(gif);
+    return postContainer;
 }
 
 function appendPost(data) {
-    const post = document.createElement('div');
-    const entries = document.createElement('p');
-    entries.textContent = data.messages;
-    const gif = document.createElement('img');
-    post.append(entries);
+    const post = createPost(data);
+    const reactions = createReactions();
+
+    const individualPost = document.createElement('div');
+    individualPost.setAttribute('class', 'individual-post');
+    individualPost.appendChild(post);
+    individualPost.appendChild(reactions);
+
     const postsContainer = document.querySelector('#posts-container');
-    postsContainer.insertBefore(post, postsContainer.firstChild);
+    postsContainer.appendChild(individualPost);
 }
 
 const getAllPosts = () => {
     fetch('http://localhost:3000/posts')
         .then(res => res.json())
-        .then(data => appendPosts(data))
-        .catch(error => (error, 'Error catching entry'));
+        .then(data => {
+            data.map(post => {
+                appendPost(post);
+            });
+        })
+        .catch(error => error, 'Error catching entry');
 };
 
 module.exports = { postEntry, getAllPosts };
@@ -98,7 +157,6 @@ const enablePostButton = () => {
 };
 
 const handleGifSearch = event => {
-    event.preventDefault();
     if (event.key === 'Enter') {
         fetchGiphy();
     }
@@ -134,21 +192,21 @@ const {
     addSelectedGifToPost
 } = require('./helpers');
 
-const { postEntry } = require('./api');
+const { postEntry, getAllPosts } = require('./api');
 
 const postText = document.querySelector('.post__text');
-const searchbar = document.querySelector('.giphy-search__container input');
-
-const gifImageContainer = document.querySelector('.giphy-search__results');
 const postButton = document.querySelector('.post__btn');
+const searchbar = document.querySelector('.giphy-search__container input');
+const gifImageContainer = document.querySelector('.giphy-search__results');
 
+postText.addEventListener('keyup', enablePostButton);
 postText.addEventListener('keydown', enablePostButton);
-postText.addEventListener('keyup', updateCharacterCount);
-postButton.addEventListener('click', event => postEntry(event));
+postText.addEventListener('keydown', updateCharacterCount);
+postButton.addEventListener('click', postEntry);
 searchbar.addEventListener('keydown', handleGifSearch);
-
 gifImageContainer.addEventListener('click', addSelectedGifToPost);
 
 enablePostButton();
+getAllPosts();
 
 },{"./api":1,"./helpers":3}]},{},[4]);
