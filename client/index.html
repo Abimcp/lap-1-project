@@ -5,9 +5,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="styles.css" />
+        <link rel="icon" href="./assets/favicon_io (1) 2/favicon-16x16.png" type="image/png" />
         <script src="scripts/reactions.js"></script>
         <script defer src="bundle.js"></script>
-        <title>Buzzer</title>
+
+        <title>Love Island Reacts</title>
     </head>
 
     <body>
@@ -28,21 +30,35 @@
             </section>
             <!-- POSTS -- this should be where the uploaded posts go -->
             <section class="post" id="posts-container">
-
                 <div class="reactions">
-                    <button type="button" id="heart__btn" class="reaction__btn" onClick="addLike('outputheart')">
+                    <button
+                        type="button"
+                        id="heart__btn"
+                        class="reaction__btn"
+                        onClick="addLike('outputheart')"
+                    >
                         💖
                         <span id="outputheart"></span>
                     </button>
-                    <button type="button" id="thumb__btn" class="reaction__btn" onClick="addLike('outputthumb')">
+                    <button
+                        type="button"
+                        id="thumb__btn"
+                        class="reaction__btn"
+                        onClick="addLike('outputthumb')"
+                    >
                         👍<span id="outputthumb"></span>
                     </button>
-                    <button type="button" id="clap__btn" class="reaction__btn" onClick="addLike('outputclap')">
+                    <button
+                        type="button"
+                        id="clap__btn"
+                        class="reaction__btn"
+                        onClick="addLike('outputclap')"
+                    >
                         👏 <span id="outputclap"></span>
                     </button>
-                    <button type="button" id="reply__btn" class="reaction__btn">
-                        <a href="#reply-search">💬 
-                    </button>
+                    <a href="#reply-search">
+                        <button type="button" id="reply__btn" class="reaction__btn">💬</button>
+                    </a>
                 </div>
             </section>
             <!-- REPLY -->

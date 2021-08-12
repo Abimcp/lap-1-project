@@ -206,11 +206,12 @@ textarea {
     font-family: 'Exo', sans-serif;
     font-size: 1.5rem;
     font-weight: 500;
-    width: 90%;
+    width: 100%;
     padding: 10px 20px;
     border-radius: 50px;
     border: none;
     outline: transparent;
+
 }
 
 .reply-search__container > text::placeholder {
