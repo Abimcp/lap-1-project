@@ -4,6 +4,7 @@
     "description": "",
     "main": "json.js",
     "scripts": {
+        "start": "node server.js",
         "server": "nodemon server.js",
         "test": "jest --watchAll",
         "coverage": "jest --coverage"
