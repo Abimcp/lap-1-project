@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 const postEntry = event => {
     event.preventDefault();
     const postText = document.querySelector('.post__text').value;
@@ -118,7 +120,8 @@ function createPost(data) {
 
     entries.textContent = data.message;
     entries.contentEditable = 'true';
-    timestamp.textContent = data.fromNow;
+    entries.style.outline = 'transparent';
+    timestamp.textContent = moment(data.timestamp).fromNow();
     gif.src = data.gif || '';
 
     postContainer.appendChild(entries);

@@ -18,9 +18,11 @@ const enablePostButton = () => {
     if (!postText.value.length) {
         postButton.style.backgroundColor = '#959595';
         postButton.style.cursor = 'not-allowed';
+        postButton.disabled = true;
     } else {
         postButton.style.backgroundColor = '#56d8e5cc';
         postButton.style.cursor = 'pointer';
+        postButton.disabled = false;
     }
 };
 
