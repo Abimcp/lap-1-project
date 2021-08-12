@@ -15,14 +15,30 @@ describe('index.html', () => {
         test('it has a title', () => {
             const head = document.querySelector('head');
             expect(head).toBeTruthy();
-            expect(head.textContent).toContain('Buzzer');
+            expect(head.textContent).toContain('Love Island Reacts');
+        });
+
+        test('there is a favicon', () => {
+            const head = document.querySelector('head');
+            expect(head.innerHTML).toContain('link rel="icon"');
+        });
+
+        test('there is a css stylesheet', () => {
+            const head = document.querySelector('head');
+            expect(head.innerHTML).toContain('link rel="stylesheet"');
         });
 
         describe('body', () => {
             test('it has a header', () => {
                 let header = document.querySelector('header');
-                expect(document.querySelector('header')).toBeTruthy();
+                expect('header').toBeTruthy();
                 expect(header.textContent).toContain('Love Island Reacts');
+            });
+            test('it has a section to display posts', () => {
+                expect(document.querySelector('#posts__container')).toBeTruthy;
+            });
+            test('it has a section to display replies', () => {
+                expect(document.querySelector('#reply__container')).toBeTruthy;
             });
 
             describe('Post Form', () => {
@@ -34,7 +50,7 @@ describe('index.html', () => {
                 test('it has a button for submitting a post', () => {
                     let postBtn = document.querySelector('.post__btn');
                     expect(postBtn).toBeTruthy();
-                    expect(postBtn.textContent).toContain('Post');
+                    expect(postBtn.getAttribute('type')).toBe('submit');
                 });
             });
 
@@ -48,6 +64,20 @@ describe('index.html', () => {
                     expect(
                         document.querySelector('.giphy-search__results')
                     ).toBeTruthy();
+                });
+            });
+
+            describe('footer', () => {
+                test('it exists', () => {
+                    let footer = document.querySelector('footer');
+                    expect(footer).toBeTruthy();
+                });
+
+                test('it contains the names of contributors', () => {
+                    let footer = document.querySelector('footer');
+                    expect(footer.textContent).toContain(
+                        '©Elicia, Tobi, Corneliu & Abi'
+                    );
                 });
             });
         });
