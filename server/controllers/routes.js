@@ -59,7 +59,7 @@ router.post('/:id/comments', (req, res) => {
     res.status(201).json(newComment);
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id/comments', (req, res) => {
     fs.readFile('data.json', 'utf8', (err, data) => {
         if (err) {
             console.log('Error reading file from disk:', err);
@@ -67,7 +67,7 @@ router.get('/:id', (req, res) => {
         }
         try {
             const posts = JSON.parse(data);
-            const id = parseInt(req.params.id);
+            const id = req.params.id;
 
             if (!id) {
                 res.status(404).json({
@@ -75,8 +75,8 @@ router.get('/:id', (req, res) => {
                 });
             }
 
-            const post = posts.filter(post => post.id === id);
-            res.json(post);
+            const post = posts.filter(post => post.id === id)[0];
+            res.json(post.comments);
         } catch (err) {
             console.log('Error parsing JSON string:', err);
         }

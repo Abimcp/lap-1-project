@@ -1,14 +1,50 @@
 [
     {
+        "id": "1628785144441",
+        "message": "Testing with another one to see what it does",
+        "gif": null,
+        "timestamp": "2021-08-12T16:19:04.395Z",
+        "fromNow": "a few seconds ago",
+        "like": 0,
+        "thumbsUp": 0,
+        "clap": 0,
+        "comments": []
+    },
+    {
         "id": "1628778265656",
         "message": "kjuhjknknkjbkj",
         "gif": null,
         "timestamp": "2021-08-12T14:24:25.634Z",
         "fromNow": "a few seconds ago",
         "like": 1,
-        "thumbsUp": 2,
-        "clap": 1,
-        "comments": []
+        "thumbsUp": 3,
+        "clap": 3,
+        "comments": [
+            {
+                "message": "testing that this works the way that it is supposed to. testing that this works the way that it is supposed to. testing that this works the way that it is supposed to. ",
+                "timestamp": "2021-08-12T14:24:25.634Z"
+            },
+            {
+                "message": "testing that this works the way that it is supposed to. testing that this works the way that it is supposed to. testing that this works the way that it is supposed to. ",
+                "timestamp": "2021-08-12T14:24:25.634Z"
+            },
+            {
+                "message": "testing that this works the way that it is supposed to. testing that this works the way that it is supposed to. testing that this works the way that it is supposed to. ",
+                "timestamp": "2021-08-12T14:24:25.634Z"
+            },
+            {
+                "message": "testing that this works the way that it is supposed to. testing that this works the way that it is supposed to. testing that this works the way that it is supposed to. ",
+                "timestamp": "2021-08-12T14:24:25.634Z"
+            },
+            {
+                "message": "testing that this works the way that it is supposed to. testing that this works the way that it is supposed to. testing that this works the way that it is supposed to. ",
+                "timestamp": "2021-08-12T14:24:25.634Z"
+            },
+            {
+                "message": "test2",
+                "timestamp": "2021-08-12T14:24:25.634Z"
+            }
+        ]
     },
     {
         "id": "1628778254212",
@@ -16,9 +52,9 @@
         "gif": "https://media2.giphy.com/media/26xBRiIYbyjCzYMAU/200_d.gif?cid=e1bb72fffrpns4crr5vnedwz9fo1abjuv77p5p7efl6gldck&rid=200_d.gif&ct=g",
         "timestamp": "2021-08-12T14:24:14.179Z",
         "fromNow": "a few seconds ago",
-        "like": 1,
-        "thumbsUp": 1,
-        "clap": 0,
+        "like": 2,
+        "thumbsUp": 2,
+        "clap": 1,
         "comments": []
     },
     {
@@ -61,7 +97,7 @@
         "timestamp": "2021-08-12T14:10:18.167Z",
         "fromNow": "a few seconds ago",
         "like": 1,
-        "thumbsUp": 0,
+        "thumbsUp": 2,
         "clap": 1,
         "comments": []
     }
