@@ -261,7 +261,6 @@ a {
     outline: transparent;
     overflow: scroll;
     resize: none;
-
 }
 
 /* .reply-search__container > text::placeholder {
@@ -363,10 +362,6 @@ footer > p {
     justify-content: space-evenly;
 }
 .footer__container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    position: absolute;
     bottom: 8px;
     left: 16px;
     justify-content: space-evenly;

@@ -12,33 +12,25 @@
         <title>Love Island Reacts</title>
     </head>
 
-<body>
-    <main>
-        <header>
-            <h1>Love Island Reacts</h1>
-        </header>
-        <!-- DARK MODE -->
-        <section id="dark__mode">
-            <label class="switch">
-                <input type="checkbox" />
-                <span class="slider round"></span>
-            </label>
-        </section>
-        <!-- POST ENTRY -->
-        <section class="post">
-            <div class="post__content">
-                <textarea class="post__text" placeholder="What's happening?" maxlength="280"></textarea>
-            </div>
-            <form class="post__actions">
-                <a href="#giphy-search"><img src="assets/gif.png" alt="gif" /></a>
-                <p class="post__characters"><span class="current-count">0</span>/280 characters</p>
-                <input type="submit" value="Post" class="post__btn" />
-            </form>
-        </section>
-        <!-- POSTS -- this should be where the uploaded posts go -->
-        <section class="post" id="posts-container">
-
-            <!-- <div class="reactions">
+    <body>
+        <main>
+            <header>
+                <h1>Love Island Reacts</h1>
+            </header>
+            <!-- POST ENTRY -->
+            <section class="post">
+                <div class="post__content">
+                    <textarea class="post__text" placeholder="What's happening?" maxlength="280"></textarea>
+                </div>
+                <form class="post__actions">
+                    <a href="#giphy-search"><img src="assets/gif.png" alt="gif" /></a>
+                    <p class="post__characters"><span class="current-count">0</span>/280 characters</p>
+                    <input type="submit" value="Post" class="post__btn" />
+                </form>
+            </section>
+            <!-- POSTS -- this should be where the uploaded posts go -->
+            <section class="post" id="posts-container">
+                <!-- <div class="reactions">
                 <button type="button" id="heart__btn" class="reaction__btn">💖</button>
                 <button type="button" id="thumb__btn" class="reaction__btn">👍</button>
                 <button type="button" id="clap__btn" class="reaction__btn">👏</button>
@@ -46,20 +38,11 @@
                     <a href="#reply-search">💬</a>
                 </button>
             </div> -->
-        </section>
-        <!-- REPLY -->
-        <section class="reply-search" id="reply-search">
-            <div id="reply__container">
-                <textarea class="reply-search__text" placeholder="Reply" maxlength="280"></textarea>
-                <a href="" class="modal__close">&times;</a>
-            </div>
-            <div class="reply__results"></div>
-        </section>
-        <!-- GIPHY SEARCH -->
-        <section class="giphy-search" id="giphy-search">
-            <form class="giphy-search__form">
-                <div class="giphy-search__container">
-                    <input type="text" placeholder="Search for GIFs" id="gif-search-bar" />
+            </section>
+            <!-- REPLY -->
+            <section class="reply-search" id="reply-search">
+                <div id="reply__container">
+                    <textarea class="reply-search__text" placeholder="Reply" maxlength="280"></textarea>
                     <a href="" class="modal__close">&times;</a>
                 </div>
                 <div class="reply__results"></div>
