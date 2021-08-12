@@ -25,7 +25,6 @@ const enablePostButton = () => {
 };
 
 const handleGifSearch = event => {
-    event.preventDefault();
     if (event.key === 'Enter') {
         fetchGiphy();
     }

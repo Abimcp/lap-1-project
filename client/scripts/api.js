@@ -22,7 +22,7 @@ const postEntry = event => {
         .catch(error => (error, 'Error catching entry'));
 };
 
-function appendReactions() {
+function createReactions() {
     const heartBtn = document.createElement('button');
     const thumbBtn = document.createElement('button');
     const clapBtn = document.createElement('button');
@@ -49,33 +49,46 @@ function appendReactions() {
     replyBtn.setAttribute('id', 'reply__btn');
     replyBtn.appendChild(aTag);
 
-    reactions.style.marginBottom = '150px';
     reactions.setAttribute('class', 'reactions');
     reactions.appendChild(heartBtn);
     reactions.appendChild(thumbBtn);
     reactions.appendChild(clapBtn);
     reactions.appendChild(replyBtn);
 
-    const postsContainer = document.querySelector('#posts-container');
-    postsContainer.append(reactions);
+    return reactions;
 }
 
-// function appendPosts(posts) {
-//     posts.forEach(appendPost);
-// }
+function createPost(data) {
+    const postContainer = document.createElement('div');
+    const entries = document.createElement('p');
+    const gif = document.createElement('img');
+    const timestamp = document.createElement('p');
+
+    entries.setAttribute('class', 'message');
+    timestamp.setAttribute('class', 'timestamp');
+
+    entries.textContent = data.message;
+    entries.contentEditable = 'true';
+    timestamp.textContent = data.fromNow;
+    gif.src = data.gif || '';
+
+    postContainer.appendChild(entries);
+    postContainer.appendChild(timestamp);
+    postContainer.appendChild(gif);
+    return postContainer;
+}
 
 function appendPost(data) {
-    const post = document.createElement('div');
-    const entries = document.createElement('p');
-    entries.textContent = data.message;
-    const gif = document.createElement('img');
-    data.gif ? (gif.src = data.gif) : null;
+    const post = createPost(data);
+    const reactions = createReactions();
 
-    post.appendChild(entries);
-    post.appendChild(gif);
+    const individualPost = document.createElement('div');
+    individualPost.setAttribute('class', 'individual-post');
+    individualPost.appendChild(post);
+    individualPost.appendChild(reactions);
+
     const postsContainer = document.querySelector('#posts-container');
-    // postsContainer.insertBefore(post, postsContainer.firstChild);
-    postsContainer.appendChild(post);
+    postsContainer.appendChild(individualPost);
 }
 
 const getAllPosts = () => {
@@ -84,8 +97,6 @@ const getAllPosts = () => {
         .then(data => {
             data.map(post => {
                 appendPost(post);
-                appendReactions();
-                console.log(post, 'Posts data');
             });
         })
         .catch(error => error, 'Error catching entry');
