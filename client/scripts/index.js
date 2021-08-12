@@ -7,8 +7,6 @@ const {
 
 const { postEntry, getAllPosts } = require('./api');
 
-const addLike = require('./reactions');
-
 const postText = document.querySelector('.post__text');
 const postButton = document.querySelector('.post__btn');
 const searchbar = document.querySelector('.giphy-search__container input');

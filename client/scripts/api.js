@@ -22,7 +22,7 @@ const postEntry = event => {
         .catch(error => (error, 'Error catching entry'));
 };
 
-function createReactions() {
+function createReactions(data) {
     const heartBtn = document.createElement('button');
     const thumbBtn = document.createElement('button');
     const clapBtn = document.createElement('button');
@@ -39,18 +39,25 @@ function createReactions() {
     clapSpan.setAttribute('id', 'outputclap');
     replySpan.setAttribute('id', 'outputreply');
 
+    heartSpan.innerHTML = data.like;
+    thumbSpan.innerHTML = data.thumbsUp;
+    clapSpan.innerHTML = data.clap;
+    replySpan.innerHTML = data.comments.length;
+
     heartBtn.setAttribute('class', 'reaction__btn');
     heartBtn.setAttribute('id', 'heart__btn');
     heartBtn.textContent = '💖';
-    heartBtn.setAttribute('onClick', "addLike('outputheart')");
+    heartBtn.appendChild(heartSpan);
 
     thumbBtn.setAttribute('class', 'reaction__btn');
     thumbBtn.setAttribute('id', 'thumb__btn');
     thumbBtn.textContent = '👍';
+    thumbBtn.appendChild(thumbSpan);
 
     clapBtn.setAttribute('class', 'reaction__btn');
     clapBtn.setAttribute('id', 'clap__btn');
     clapBtn.textContent = '👏';
+    clapBtn.appendChild(clapSpan);
 
     aTag.setAttribute('href', '#reply-search');
     aTag.textContent = '💬';
@@ -58,6 +65,7 @@ function createReactions() {
     replyBtn.setAttribute('class', 'reaction__btn');
     replyBtn.setAttribute('id', 'reply__btn');
     replyBtn.appendChild(aTag);
+    replyBtn.appendChild(replySpan);
 
     reactions.setAttribute('class', 'reactions');
     reactions.appendChild(heartBtn);
@@ -90,7 +98,7 @@ function createPost(data) {
 
 function appendPost(data) {
     const post = createPost(data);
-    const reactions = createReactions();
+    const reactions = createReactions(data);
 
     const individualPost = document.createElement('div');
     individualPost.setAttribute('class', 'individual-post');

@@ -23,25 +23,42 @@ const postEntry = event => {
         .catch(error => (error, 'Error catching entry'));
 };
 
-function createReactions() {
+function createReactions(data) {
     const heartBtn = document.createElement('button');
     const thumbBtn = document.createElement('button');
     const clapBtn = document.createElement('button');
     const replyBtn = document.createElement('button');
     const aTag = document.createElement('a');
+    const heartSpan = document.createElement('span');
+    const thumbSpan = document.createElement('span');
+    const clapSpan = document.createElement('span');
+    const replySpan = document.createElement('span');
     const reactions = document.createElement('div');
+
+    heartSpan.setAttribute('id', 'outputheart');
+    thumbSpan.setAttribute('id', 'outputthumb');
+    clapSpan.setAttribute('id', 'outputclap');
+    replySpan.setAttribute('id', 'outputreply');
+
+    heartSpan.innerHTML = data.like;
+    thumbSpan.innerHTML = data.thumbsUp;
+    clapSpan.innerHTML = data.clap;
+    replySpan.innerHTML = data.comments.length;
 
     heartBtn.setAttribute('class', 'reaction__btn');
     heartBtn.setAttribute('id', 'heart__btn');
     heartBtn.textContent = '💖';
+    heartBtn.appendChild(heartSpan);
 
     thumbBtn.setAttribute('class', 'reaction__btn');
     thumbBtn.setAttribute('id', 'thumb__btn');
     thumbBtn.textContent = '👍';
+    thumbBtn.appendChild(thumbSpan);
 
     clapBtn.setAttribute('class', 'reaction__btn');
     clapBtn.setAttribute('id', 'clap__btn');
     clapBtn.textContent = '👏';
+    clapBtn.appendChild(clapSpan);
 
     aTag.setAttribute('href', '#reply-search');
     aTag.textContent = '💬';
@@ -49,6 +66,7 @@ function createReactions() {
     replyBtn.setAttribute('class', 'reaction__btn');
     replyBtn.setAttribute('id', 'reply__btn');
     replyBtn.appendChild(aTag);
+    replyBtn.appendChild(replySpan);
 
     reactions.setAttribute('class', 'reactions');
     reactions.appendChild(heartBtn);
@@ -81,7 +99,7 @@ function createPost(data) {
 
 function appendPost(data) {
     const post = createPost(data);
-    const reactions = createReactions();
+    const reactions = createReactions(data);
 
     const individualPost = document.createElement('div');
     individualPost.setAttribute('class', 'individual-post');
@@ -185,20 +203,6 @@ module.exports = {
 };
 
 },{"./giphy":2}],4:[function(require,module,exports){
-let hasClicked = false;
-
-function addLike(outputId) {
-    let current = document.getElementById(outputId).innerHTML;
-    if (!hasClicked) {
-        current++;
-        document.getElementById(outputId).innerHTML = current;
-        // hasClicked = true;
-    }
-}
-
-module.exports = addLike;
-
-},{}],5:[function(require,module,exports){
 const {
     updateCharacterCount,
     handleGifSearch,
@@ -207,8 +211,6 @@ const {
 } = require('./helpers');
 
 const { postEntry, getAllPosts } = require('./api');
-
-const addLike = require('./reactions');
 
 const postText = document.querySelector('.post__text');
 const postButton = document.querySelector('.post__btn');
@@ -225,4 +227,4 @@ gifImageContainer.addEventListener('click', addSelectedGifToPost);
 enablePostButton();
 getAllPosts();
 
-},{"./api":1,"./helpers":3,"./reactions":4}]},{},[5]);
+},{"./api":1,"./helpers":3}]},{},[4]);

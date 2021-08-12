@@ -196,6 +196,10 @@ a {
     transition: all 0.2s ease-in;
 }
 
+.reactions span {
+    margin-left: 10px;
+}
+
 #output {
     font-family: 'Open Sans', sans-serif;
     font-size: 10pt;
@@ -261,6 +265,7 @@ a {
     outline: transparent;
     overflow: scroll;
     resize: none;
+}
 /* .reply-search__container > text::placeholder {
     color: var(--c-grey-placeholder);
 } */
