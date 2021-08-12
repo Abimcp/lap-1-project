@@ -28,11 +28,21 @@ function createReactions() {
     const clapBtn = document.createElement('button');
     const replyBtn = document.createElement('button');
     const aTag = document.createElement('a');
+    const heartSpan = document.createElement('span');
+    const thumbSpan = document.createElement('span');
+    const clapSpan = document.createElement('span');
+    const replySpan = document.createElement('span');
     const reactions = document.createElement('div');
+
+    heartSpan.setAttribute('id', 'outputheart');
+    thumbSpan.setAttribute('id', 'outputthumb');
+    clapSpan.setAttribute('id', 'outputclap');
+    replySpan.setAttribute('id', 'outputreply');
 
     heartBtn.setAttribute('class', 'reaction__btn');
     heartBtn.setAttribute('id', 'heart__btn');
     heartBtn.textContent = '💖';
+    heartBtn.setAttribute('onClick', "addLike('outputheart')");
 
     thumbBtn.setAttribute('class', 'reaction__btn');
     thumbBtn.setAttribute('id', 'thumb__btn');
