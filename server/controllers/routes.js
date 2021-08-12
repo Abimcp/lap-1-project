@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 //put route for updating emojis /posts/:id
 
 router.post('/:id/reactions', (req, res) => {
-    const id = parseInt(req.params.id);
+    const id = req.params.id;
 
     if (!id) {
         res.status(404).json({ message: `There is no post with the id ${id}` });

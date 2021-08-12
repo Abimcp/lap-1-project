@@ -20,7 +20,34 @@ const postEntry = event => {
         .then(data => console.log(data))
         // removes the #giphy_search from url
         .then(window.location.replace(window.location.href.split('#')[0]))
-        .catch(error => (error, 'Error catching entry'));
+        .catch(error => console.log(error, 'Error catching entry'));
+};
+
+const postReactionCount = (id, reaction) => {
+    fetch(`http://localhost:3000/posts/${id}/reactions`, {
+        method: 'POST',
+        body: JSON.stringify({
+            reaction: reaction
+        }),
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(res => res.json())
+        .then(data => console.log('count data ', data))
+        .catch(error => console.log('Error incrementing count ', error));
+};
+
+const getAllPosts = () => {
+    fetch('http://localhost:3000/posts')
+        .then(res => res.json())
+        .then(data => {
+            data.map(post => {
+                appendPost(post);
+            });
+        })
+        .catch(error => error, 'Error catching entry');
 };
 
 function createReactions(data) {
@@ -74,6 +101,10 @@ function createReactions(data) {
     reactions.appendChild(clapBtn);
     reactions.appendChild(replyBtn);
 
+    heartBtn.addEventListener('click', () => postReactionCount(data.id, 'like'));
+    thumbBtn.addEventListener('click', () => postReactionCount(data.id, 'thumbsUp'));
+    clapBtn.addEventListener('click', () => postReactionCount(data.id, 'clap'));
+
     return reactions;
 }
 
@@ -109,17 +140,6 @@ function appendPost(data) {
     const postsContainer = document.querySelector('#posts-container');
     postsContainer.appendChild(individualPost);
 }
-
-const getAllPosts = () => {
-    fetch('http://localhost:3000/posts')
-        .then(res => res.json())
-        .then(data => {
-            data.map(post => {
-                appendPost(post);
-            });
-        })
-        .catch(error => error, 'Error catching entry');
-};
 
 module.exports = { postEntry, getAllPosts };
 
