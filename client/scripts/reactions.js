@@ -8,3 +8,5 @@ function addLike(outputId) {
         // hasClicked = true;
     }
 }
+
+module.exports = addLike;
