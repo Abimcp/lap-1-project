@@ -20,10 +20,37 @@ const postEntry = event => {
         .then(data => console.log(data))
         // removes the #giphy_search from url
         .then(window.location.replace(window.location.href.split('#')[0]))
-        .catch(error => (error, 'Error catching entry'));
+        .catch(error => console.log(error, 'Error catching entry'));
 };
 
-function createReactions() {
+const postReactionCount = (id, reaction) => {
+    fetch(`http://localhost:3000/posts/${id}/reactions`, {
+        method: 'POST',
+        body: JSON.stringify({
+            reaction: reaction
+        }),
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(res => res.json())
+        .then(data => console.log('count data ', data))
+        .catch(error => console.log('Error incrementing count ', error));
+};
+
+const getAllPosts = () => {
+    fetch('http://localhost:3000/posts')
+        .then(res => res.json())
+        .then(data => {
+            data.map(post => {
+                appendPost(post);
+            });
+        })
+        .catch(error => error, 'Error catching entry');
+};
+
+function createReactions(data) {
     const heartBtn = document.createElement('button');
     const thumbBtn = document.createElement('button');
     const clapBtn = document.createElement('button');
@@ -40,18 +67,25 @@ function createReactions() {
     clapSpan.setAttribute('id', 'outputclap');
     replySpan.setAttribute('id', 'outputreply');
 
+    heartSpan.innerHTML = data.like;
+    thumbSpan.innerHTML = data.thumbsUp;
+    clapSpan.innerHTML = data.clap;
+    replySpan.innerHTML = data.comments.length;
+
     heartBtn.setAttribute('class', 'reaction__btn');
     heartBtn.setAttribute('id', 'heart__btn');
     heartBtn.textContent = '💖';
-    heartBtn.setAttribute('onClick', "addLike('outputheart')");
+    heartBtn.appendChild(heartSpan);
 
     thumbBtn.setAttribute('class', 'reaction__btn');
     thumbBtn.setAttribute('id', 'thumb__btn');
     thumbBtn.textContent = '👍';
+    thumbBtn.appendChild(thumbSpan);
 
     clapBtn.setAttribute('class', 'reaction__btn');
     clapBtn.setAttribute('id', 'clap__btn');
     clapBtn.textContent = '👏';
+    clapBtn.appendChild(clapSpan);
 
     aTag.setAttribute('href', '#reply-search');
     aTag.textContent = '💬';
@@ -59,12 +93,17 @@ function createReactions() {
     replyBtn.setAttribute('class', 'reaction__btn');
     replyBtn.setAttribute('id', 'reply__btn');
     replyBtn.appendChild(aTag);
+    replyBtn.appendChild(replySpan);
 
     reactions.setAttribute('class', 'reactions');
     reactions.appendChild(heartBtn);
     reactions.appendChild(thumbBtn);
     reactions.appendChild(clapBtn);
     reactions.appendChild(replyBtn);
+
+    heartBtn.addEventListener('click', () => postReactionCount(data.id, 'like'));
+    thumbBtn.addEventListener('click', () => postReactionCount(data.id, 'thumbsUp'));
+    clapBtn.addEventListener('click', () => postReactionCount(data.id, 'clap'));
 
     return reactions;
 }
@@ -91,7 +130,7 @@ function createPost(data) {
 
 function appendPost(data) {
     const post = createPost(data);
-    const reactions = createReactions();
+    const reactions = createReactions(data);
 
     const individualPost = document.createElement('div');
     individualPost.setAttribute('class', 'individual-post');
@@ -101,17 +140,6 @@ function appendPost(data) {
     const postsContainer = document.querySelector('#posts-container');
     postsContainer.appendChild(individualPost);
 }
-
-const getAllPosts = () => {
-    fetch('http://localhost:3000/posts')
-        .then(res => res.json())
-        .then(data => {
-            data.map(post => {
-                appendPost(post);
-            });
-        })
-        .catch(error => error, 'Error catching entry');
-};
 
 module.exports = { postEntry, getAllPosts };
 
@@ -195,20 +223,6 @@ module.exports = {
 };
 
 },{"./giphy":2}],4:[function(require,module,exports){
-let hasClicked = false;
-
-function addLike(outputId) {
-    let current = document.getElementById(outputId).innerHTML;
-    if (!hasClicked) {
-        current++;
-        document.getElementById(outputId).innerHTML = current;
-        // hasClicked = true;
-    }
-}
-
-module.exports = addLike;
-
-},{}],5:[function(require,module,exports){
 const {
     updateCharacterCount,
     handleGifSearch,
@@ -217,8 +231,6 @@ const {
 } = require('./helpers');
 
 const { postEntry, getAllPosts } = require('./api');
-
-const addLike = require('./reactions');
 
 const postText = document.querySelector('.post__text');
 const postButton = document.querySelector('.post__btn');
@@ -235,4 +247,4 @@ gifImageContainer.addEventListener('click', addSelectedGifToPost);
 enablePostButton();
 getAllPosts();
 
-},{"./api":1,"./helpers":3,"./reactions":4}]},{},[5]);
+},{"./api":1,"./helpers":3}]},{},[4]);
