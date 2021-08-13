@@ -69,12 +69,6 @@ router.get('/:id/comments', (req, res) => {
             const posts = JSON.parse(data);
             const id = req.params.id;
 
-            if (!posts.includes(id)) {
-                res.status(404).json({
-                    message: `There is no post with the id ${id}`
-                });
-            }
-
             const post = posts.filter(post => post.id === id)[0];
             res.json(post.comments);
         } catch (err) {

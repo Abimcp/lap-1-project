@@ -5712,23 +5712,6 @@ const postReactionCount = (id, reaction) => {
         .catch(error => console.log('Error incrementing count ', error));
 };
 
-const postComment = id => {
-    const comment = document.querySelector('.reply-search__text').value;
-    fetch(`https://island-reactions.herokuapp.com/posts/${id}/comments`, {
-        method: 'POST',
-        body: JSON.stringify({
-            message: comment,
-            timestamp: new Date()
-        }),
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(res => res.json())
-        .then(data => console.log('data ', data));
-};
-
 const getComments = id => {
     fetch(`https://island-reactions.herokuapp.com/posts/${id}/comments`)
         .then(res => res.json())
@@ -5879,7 +5862,14 @@ function appendComment(data) {
     replyResultsContainer.appendChild(commentContainer);
 }
 
-module.exports = { postEntry, getAllPosts, appendPost };
+module.exports = {
+    postEntry,
+    getAllPosts,
+    appendPost,
+    postReactionCount,
+    getComments,
+    appendComment
+};
 
 },{"moment":1}],3:[function(require,module,exports){
 const apiKey = 'dc6zaTOxFJmzC';

@@ -291,10 +291,12 @@ a:visited {
 
 .reply__results {
     padding: 30px;
+    width: 100%;
 }
 
 .comment__container {
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .comment__timestamp {
