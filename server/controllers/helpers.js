@@ -5,7 +5,6 @@ const writeToJson = data => {
         if (error) {
             console.log('Error saving post data to JSON file', error);
         }
-        console.log('JSON data saved successfully');
     });
 };
 

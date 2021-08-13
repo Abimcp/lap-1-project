@@ -6,42 +6,51 @@ const request = supertest(server);
 const testPost = { message: 'Hello world', timestamp: new Date() };
 
 describe('API endpoints', () => {
-    // let api;
-
-    // beforeAll(() => {
-    //     api = server.listen(5000, () =>
-    //         console.log('Test server running on port 5000')
-    //     );
-    // });
-
-    // afterAll(done => {
-    //     console.log('Gracefully stopping test server');
-    //     api.close(done);
-    // });
-    // it('responds to /', done => {
-    //     request(api).get('/').expect(200, done);
-    // });
-    // it('responds to GET /posts', done => {
-    //     request(api).get('/posts').expect(200, done);
-    // });
-    // it('responds to non existing paths with 404', done => {
-    //     request(api).get('/no').expect(404, done);
-    // });
-
     it('should return some posts', async () => {
         const { status, body } = await request.get('/posts');
         expect(status).toBe(200);
         expect(body.length).toBeGreaterThanOrEqual(1);
     });
 
-    it('should return some posts', async () => {
+    it('should return some comments for post "1628778265656" ', async () => {
         const { status, body } = await request.get('/posts/1628778265656/comments');
         expect(status).toBe(200);
-        expect(body[0].message).toContain('testing that this works the way that');
+        expect(body[0].message).toBeTruthy();
     });
 
-    // it('should create a new post', async () => {
-    //     const { status, body } = await request.post('/posts').send(testPost);
-    //     expect(status).toBe(201);
-    // });
+    it('should return some comments for post "sdjhbfsdjhsdbjh" ', async () => {
+        const { status, body } = await request.get(
+            '/posts/sdjhbfsdjhsdbjh/comments'
+        );
+        expect(status).toBe(404);
+        expect(body.message).toContain('There is no post with the id');
+    });
+
+    it('should return some comments for post "1628778265656" ', async () => {
+        const { status, body } = await request.get('/posts/1628778265656/comments');
+        expect(status).toBe(200);
+        expect(body[0].message).toBeTruthy();
+    });
+
+    it('should create a new post', async () => {
+        const { status, body } = await request.post('/posts').send(testPost);
+        expect(status).toBe(201);
+        expect(body.message).toBe(testPost.message);
+    });
+
+    it('should create a new comment for post "1628778265656"', async () => {
+        const { status, body } = await request
+            .post('/posts/1628778265656/comments')
+            .send(testPost);
+        expect(status).toBe(201);
+        expect(body.message).toBe(testPost.message);
+    });
+
+    it('should increase like count for post "1628778265656"', async () => {
+        const { status, body } = await request
+            .post('/posts/1628778265656/reactions')
+            .send({ like: 'like' });
+        expect(status).toBe(200);
+        expect(body.message).toBe('Reaction count has been updated');
+    });
 });
