@@ -1,56 +1,42 @@
-const request = require('supertest');
-const server = require('../server');
+const supertest = require('supertest');
+const server = require('../app');
+
+const request = supertest(server);
+
+const testPost = { message: 'Hello world', timestamp: new Date() };
 
 describe('API endpoints', () => {
-    let api;
-
-    let testPost = {
-        message: 'Liberty and Kaz should win Love Island 2021',
-        timestamp: 'test',
-        gif: 'test'
-    };
-
-    beforeAll(() => {
-        api = server.listen(5000, () =>
-            console.log('Test server running on port 5000')
-        );
+    it('should return some posts', async () => {
+        const { status, body } = await request.get('/posts');
+        expect(status).toBe(200);
+        expect(body.length).toBeGreaterThanOrEqual(1);
     });
 
-    afterAll(done => {
-        console.log('Gracefully stopping test server');
-        api.close(done);
+    it('should return some comments for post "1628778265656" ', async () => {
+        const { status, body } = await request.get('/posts/1628778265656/comments');
+        expect(status).toBe(200);
+        expect(body[0].message).toBeTruthy();
     });
 
-    it('responds to /', done => {
-        request(api).get('/').expect(200, done);
+    it('should create a new post', async () => {
+        const { status, body } = await request.post('/posts').send(testPost);
+        expect(status).toBe(201);
+        expect(body.message).toBe(testPost.message);
     });
 
-    it('responds to GET /posts', done => {
-        request(api).get('/posts').expect(200, done);
+    it('should create a new comment for post "1628778265656"', async () => {
+        const { status, body } = await request
+            .post('/posts/1628778265656/comments')
+            .send(testPost);
+        expect(status).toBe(201);
+        expect(body.message).toBe(testPost.message);
     });
 
-    it('responds to POST /posts with status 201', done => {
-        request(api)
-            .post('/posts')
-            .send(testPost)
-            .set('Accept', /application\/json/)
-            .expect(201)
-            .expect({ ...testPost }, done);
-    });
-
-    it('responds to GET /:id', done => {
-        request(api).get('/posts/:id').expect(200, done);
-    });
-
-    it('responds to GET /:id/comments', done => {
-        request(api).get('/posts/:id/comments').expect(200, done);
-    });
-
-    it('responds to non existing paths with 404', done => {
-        request(api).get('/non').expect(404, done);
-    });
-
-    it('responds to invalid method request with 405', done => {
-        request(api).post('/').expect(405, done);
+    it('should increase like count for post "1628778265656"', async () => {
+        const { status, body } = await request
+            .post('/posts/1628778265656/reactions')
+            .send({ like: 'like' });
+        expect(status).toBe(200);
+        expect(body.message).toBe('Reaction count has been updated');
     });
 });
