@@ -18,20 +18,6 @@ describe('API endpoints', () => {
         expect(body[0].message).toBeTruthy();
     });
 
-    it('should return some comments for post "sdjhbfsdjhsdbjh" ', async () => {
-        const { status, body } = await request.get(
-            '/posts/sdjhbfsdjhsdbjh/comments'
-        );
-        expect(status).toBe(404);
-        expect(body.message).toContain('There is no post with the id');
-    });
-
-    it('should return some comments for post "1628778265656" ', async () => {
-        const { status, body } = await request.get('/posts/1628778265656/comments');
-        expect(status).toBe(200);
-        expect(body[0].message).toBeTruthy();
-    });
-
     it('should create a new post', async () => {
         const { status, body } = await request.post('/posts').send(testPost);
         expect(status).toBe(201);
