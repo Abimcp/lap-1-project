@@ -5676,7 +5676,7 @@ const moment = require('moment');
 const postEntry = event => {
     event.preventDefault();
     const postText = document.querySelector('.post__text').value;
-    fetch('http://localhost:3000/posts', {
+    fetch('https://island-reactions.herokuapp.com/posts', {
         method: 'POST',
         body: JSON.stringify({
             message: postText,
@@ -5693,12 +5693,11 @@ const postEntry = event => {
         .then(res => res.json())
         .then(data => console.log(data))
         // removes the #giphy_search from url
-        .then(window.location.replace(window.location.href.split('#')[0]))
         .catch(error => console.log(error, 'Error posting entry'));
 };
 
 const postReactionCount = (id, reaction) => {
-    fetch(`http://localhost:3000/posts/${id}/reactions`, {
+    fetch(`https://island-reactions.herokuapp.com/posts/${id}/reactions`, {
         method: 'POST',
         body: JSON.stringify({
             reaction: reaction
@@ -5713,8 +5712,25 @@ const postReactionCount = (id, reaction) => {
         .catch(error => console.log('Error incrementing count ', error));
 };
 
+const postComment = id => {
+    const comment = document.querySelector('.reply-search__text').value;
+    fetch(`https://island-reactions.herokuapp.com/posts/${id}/comments`, {
+        method: 'POST',
+        body: JSON.stringify({
+            message: comment,
+            timestamp: new Date()
+        }),
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(res => res.json())
+        .then(data => console.log('data ', data));
+};
+
 const getComments = id => {
-    fetch(`http://localhost:3000/posts/${id}/comments`)
+    fetch(`https://island-reactions.herokuapp.com/posts/${id}/comments`)
         .then(res => res.json())
         .then(data =>
             data.map(comment => {
@@ -5725,11 +5741,12 @@ const getComments = id => {
 };
 
 const getAllPosts = () => {
-    fetch('http://localhost:3000/posts')
+    fetch('https://island-reactions.herokuapp.com/posts')
         .then(res => res.json())
         .then(data => {
             data.map(post => {
                 appendPost(post);
+                individualPost = post;
             });
         })
         .catch(error => console.log('Error getting all posts ', error));
@@ -5747,14 +5764,18 @@ function createReactions(data) {
     const replySpan = document.createElement('span');
     const reactions = document.createElement('div');
 
+    let currentLikeCount = data.like;
+    let currentThumbsUpCount = data.thumbsUp;
+    let currentClapCount = data.clap;
+
     heartSpan.setAttribute('id', 'outputheart');
     thumbSpan.setAttribute('id', 'outputthumb');
     clapSpan.setAttribute('id', 'outputclap');
     replySpan.setAttribute('id', 'outputreply');
 
-    heartSpan.innerHTML = data.like;
-    thumbSpan.innerHTML = data.thumbsUp;
-    clapSpan.innerHTML = data.clap;
+    heartSpan.innerHTML = currentLikeCount;
+    thumbSpan.innerHTML = currentThumbsUpCount;
+    clapSpan.innerHTML = currentClapCount;
     replySpan.innerHTML = data.comments.length;
 
     heartBtn.setAttribute('class', 'reaction__btn');
@@ -5786,9 +5807,21 @@ function createReactions(data) {
     reactions.appendChild(clapBtn);
     reactions.appendChild(replyBtn);
 
-    heartBtn.addEventListener('click', () => postReactionCount(data.id, 'like'));
-    thumbBtn.addEventListener('click', () => postReactionCount(data.id, 'thumbsUp'));
-    clapBtn.addEventListener('click', () => postReactionCount(data.id, 'clap'));
+    heartBtn.addEventListener('click', () => {
+        heartSpan.innerHTML = ++currentLikeCount;
+        postReactionCount(data.id, 'like');
+    });
+
+    thumbBtn.addEventListener('click', () => {
+        thumbSpan.innerHTML = ++currentThumbsUpCount;
+        postReactionCount(data.id, 'thumbsUp');
+    });
+
+    clapBtn.addEventListener('click', () => {
+        clapSpan.innerHTML = ++currentClapCount;
+        postReactionCount(data.id, 'clap');
+    });
+
     aTag.addEventListener('click', () => getComments(data.id));
 
     return reactions;
@@ -5846,7 +5879,7 @@ function appendComment(data) {
     replyResultsContainer.appendChild(commentContainer);
 }
 
-module.exports = { postEntry, getAllPosts };
+module.exports = { postEntry, getAllPosts, appendPost };
 
 },{"moment":1}],3:[function(require,module,exports){
 const apiKey = 'dc6zaTOxFJmzC';
@@ -5947,7 +5980,15 @@ const gifImageContainer = document.querySelector('.giphy-search__results');
 postText.addEventListener('keyup', enablePostButton);
 postText.addEventListener('keydown', enablePostButton);
 postText.addEventListener('keydown', updateCharacterCount);
-postButton.addEventListener('click', postEntry);
+postButton.addEventListener('click', event => {
+    postEntry(event);
+
+    setTimeout(() => {
+        location.reload();
+        window.location.replace(window.location.href.split('#')[0]);
+    }, 1);
+});
+
 searchbar.addEventListener('keydown', handleGifSearch);
 gifImageContainer.addEventListener('click', addSelectedGifToPost);
 

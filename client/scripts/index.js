@@ -15,7 +15,15 @@ const gifImageContainer = document.querySelector('.giphy-search__results');
 postText.addEventListener('keyup', enablePostButton);
 postText.addEventListener('keydown', enablePostButton);
 postText.addEventListener('keydown', updateCharacterCount);
-postButton.addEventListener('click', postEntry);
+postButton.addEventListener('click', event => {
+    postEntry(event);
+
+    setTimeout(() => {
+        location.reload();
+        window.location.replace(window.location.href.split('#')[0]);
+    }, 1);
+});
+
 searchbar.addEventListener('keydown', handleGifSearch);
 gifImageContainer.addEventListener('click', addSelectedGifToPost);
 
